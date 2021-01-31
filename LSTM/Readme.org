@@ -1,0 +1,16 @@
+#+TITLE: Readme
+
+* TODO
+* Load Dataset [0/3]
+- [ ] Clean Dataset
+- [ ] Replace missing rows wherever possible eg speed from latlong
+- [ ]
+* Data Augmentation [0/3]
+- [ ] Cluster to find a new variable - Ship type
+- [ ] Shift data using gaussian noise
+* Model [0/3]
+- [ ] Train a recurrent model on dataset for varying time sizes
+- [ ] Store the model state and resume for online anomaly detection
+* Simulate [0/2]
+- [ ] Make a Gaussian Normal based simulator
+- [ ] Add destination lat long and ship state
