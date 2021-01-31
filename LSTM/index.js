@@ -1,4 +1,4 @@
-let requestUrl = "https://raw.githubusercontent.com/keshavsethi/streamlit/master/csvjson.json";
+let requestUrl = "https://raw.githubusercontent.com/keshavsethi/LSTM/master/LSTM/waka.json"
 url_post = "http://127.0.0.1:5000/predict_withone";
 
 
@@ -18,7 +18,7 @@ var slider4 = document.getElementById("myRange4");
       console.log(data);
 //data.filter(x.speed => !!x.speed);
         data.sort(function(a, b){
-           return new Date(b.timestamp) - new Date(a.timestamp);
+           return new Date(b['# Timestamp']) - new Date(a["# Timestamp"]);
       });
         data_raw = [];
         course_raw  = [];
@@ -29,12 +29,12 @@ var slider4 = document.getElementById("myRange4");
         let index = 0;
         for(let index1 in data){
           
-          data_raw.push({ timestamp: data[index1].timestamp, speed: data[index1].SOG });
-          course_raw.push({ timestamp: data[index1].timestamp, course: data[index1].COG });
-          rot_raw.push({ timestamp: data[index1].timestamp, rot: data[index1].ROT });
-          lat_raw.push({ timestamp: data[index1].timestamp, lat: data[index1].Latitude });
-          long_raw.push({ timestamp: data[index1].timestamp, long: data[index1].Longitude });
-          heading_raw.push({ timestamp: data[index1].timestamp, heading: data[index1].Heading });
+          data_raw.push({ timestamp: data[index1]["# Timestamp"], speed: data[index1].SOG });
+          course_raw.push({ timestamp: data[index1]["# Timestamp"], course: data[index1].COG });
+          rot_raw.push({ timestamp: data[index1]["# Timestamp"], rot: data[index1].ROT });
+          lat_raw.push({ timestamp: data[index1]["# Timestamp"], lat: data[index1].Latitude });
+          long_raw.push({ timestamp: data[index1]["# Timestamp"], long: data[index1].Longitude });
+          heading_raw.push({ timestamp: data[index1]["# Timestamp"], heading: data[index1].Heading });
           index++;
         }
          data_raw.reverse();
@@ -336,7 +336,7 @@ var minuteView4 = {
   Plotly.extendTraces('graph4', update4, [0])
   });
   if(++cnt === 100000) clearInterval(interval);
-  }, 5000);
+  }, 1000);
   
     }
   );
