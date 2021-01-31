@@ -29,12 +29,12 @@ var slider4 = document.getElementById("myRange4");
         let index = 0;
         for(let index1 in data){
           
-          data_raw.push({ timestamp: data[index1].timestamp, speed: data[index1].speed });
-          course_raw.push({ timestamp: data[index1].timestamp, course: data[index1].course });
-          rot_raw.push({ timestamp: data[index1].timestamp, rot: data[index1].rot });
-          lat_raw.push({ timestamp: data[index1].timestamp, lat: data[index1].latitude });
-          long_raw.push({ timestamp: data[index1].timestamp, long: data[index1].longitude });
-          heading_raw.push({ timestamp: data[index1].timestamp, heading: data[index1].heading });
+          data_raw.push({ timestamp: data[index1].timestamp, speed: data[index1].SOG });
+          course_raw.push({ timestamp: data[index1].timestamp, course: data[index1].COG });
+          rot_raw.push({ timestamp: data[index1].timestamp, rot: data[index1].ROT });
+          lat_raw.push({ timestamp: data[index1].timestamp, lat: data[index1].Latitude });
+          long_raw.push({ timestamp: data[index1].timestamp, long: data[index1].Longitude });
+          heading_raw.push({ timestamp: data[index1].timestamp, heading: data[index1].Heading });
           index++;
         }
          data_raw.reverse();
@@ -210,7 +210,7 @@ postData(url_post, data1)
   .then(data => {
   var update1 = {
     x:  [[timestamp[cnt+1]], [timestamp[cnt+1]]],
-    y: [[speed[cnt+1]], [data[8]]]
+    y: [[speed[cnt+1]], [data.SOG]]
     }
 console.log(data);
   var time1 = update1.x[0];

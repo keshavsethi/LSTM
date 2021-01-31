@@ -20,9 +20,11 @@ def get_model():
 
     return g.model
 
-model = md.Model("./weights")
+# model = md.Model("./weights")
+#
 @app.route('/predict_withone', methods=['POST'])
 def predict_withone():
+    print("predicting")
     model = get_model()
     event = json.loads(request.data)
     values = event["values"]
