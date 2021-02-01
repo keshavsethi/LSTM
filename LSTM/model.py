@@ -31,7 +31,7 @@ class Model:
     def construct_model(self):
         feature_columns = []
         input_layer = layers.Input(batch_input_shape=(1, None, DATASET_IN))
-        output = layers.LSTM(256, stateful=True, dropout=0.3, name="recurrent_1")(
+        output = layers.GRU(128, stateful=True, dropout=0.3, name="recurrent_1")(
             input_layer
         )
         output = layers.Dense(32)(output)
@@ -52,6 +52,7 @@ class Model:
         self.mse = np.array([])
         self._anomaly_prob = np.array([])
         self.anomaly_prob = []
+        self.prev_val=[]
 
     def run_model_init(self, Xs, look_back=5):
         self.reset_model()
@@ -83,7 +84,7 @@ class Model:
 
         if len(self.mse) > 1:
             self.smooth_dev = smooth(
-                (self.mse - self.mse.mean()) / self.mse.std(), min(10, len(self.mse))
+                (self.mse - self.mse.mean()) / self.mse.std(), min(3, len(self.mse))
             )
 
             self._anomaly_prob = np.append(
@@ -95,7 +96,8 @@ class Model:
 
         self.anomaly_prob.append(min(self._anomaly_prob[-min(5, len(self._anomaly_prob)):]))
         if len(self.smooth_dev)>5:
-            self.anomalies.append(min(smooth(model.smooth_dev>=np.quantile(model.smooth_dev,0.95),5)[-5:]))
+            self.anomalies.append(min(smooth(self.smooth_dev>=np.quantile(self.smooth_dev,0.95),5)[-5:]))
+
         return {
             "Latitude": self.predictions[-1][0],
             "Longitude": self.predictions[-1][1],
