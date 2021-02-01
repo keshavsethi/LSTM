@@ -25,4 +25,4 @@ server = manager.get_server()
 server.serve_forever()
 
 for i in range(10):
-    model.predictions
+    print(model)

@@ -31,7 +31,7 @@ class Model:
     def construct_model(self):
         feature_columns = []
         input_layer = layers.Input(batch_input_shape=(1, None, DATASET_IN))
-        output = layers.GRU(128, stateful=True, dropout=0.3, name="recurrent_1")(
+        output = layers.LSTM(256, stateful=True, dropout=0.3, name="recurrent_1")(
             input_layer
         )
         output = layers.Dense(32)(output)

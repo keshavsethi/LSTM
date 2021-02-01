@@ -26,12 +26,16 @@ def get_model():
 def predict_withone():
     print("predicting")
     model = get_model()
+    print("event")
     event = json.loads(request.data)
     values = event["values"]
+    print("values")
+    print(values)
+    values = [x if x is not None else 0 for x in values]
     prediction = model.run_model_online(values)
     prediction = {y: float(x) for y,x  in prediction.items()}
-    print("value---------", prediction)
-    return jsonify(prediction)   
+    return jsonify(prediction)
+
 
 
 @app.route('/resetmodel', methods=['POST'])
