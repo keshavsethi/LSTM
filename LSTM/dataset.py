@@ -11,13 +11,14 @@ class Dataset:
         self.df = pd.read_csv(path_to_csv)
 
     def clean(self):
-        self.df.fillna(0)
+        self.df["SOG"].dropna()
         self.df.sort_values(by=['# Timestamp'], inplace=True, kind = "mergesort")
+        self.df.sort_values(by=['MMSI'], inplace=True, kind = "mergesort")
         self.df = self.df.replace(np.NaN,0)
-        self.df = self.df.join(pd.get_dummies(self.df["Type of mobile"]))
+        # self.df = self.df.join(pd.get_dummies(self.df["Type of mobile"]))
         self.Xs = []
         for x in self.df.MMSI.unique():
-            self.Xs.append(np.array(self.df[self.df["MMSI"]==x][["AtoN","Base Station","Class A", "Class B","Heading","Latitude","Longitude", "ROT", "SOG", "COG"]]))
+            self.Xs.append(np.array(self.df[self.df["MMSI"]==x][["Latitude","Longitude", "ROT", "SOG", "COG","Heading"]]))
         self.Xs=np.array(self.Xs)
         # self.df.replace(np.nan,0)
         # self.df.replace(np.NAN,0)

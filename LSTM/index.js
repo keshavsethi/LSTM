@@ -188,7 +188,7 @@ if(cb4.checked){
 }
 
 
-let data1 = {values: [0,0,1,0,parseFloat((param.d[0])[0]), (position.x[0])[0], (position.y[0])[0],parseFloat((param.c[0])[0]), parseFloat((param.a[0])[0]),parseFloat((param.b[0])[0])]};
+      let data1 = {values: [ (position.x[0])[0], (position.y[0])[0],parseFloat((param.c[0])[0]), parseFloat((param.a[0])[0]),parseFloat((param.b[0])[0]),parseFloat((param.d[0])[0])]};
 
 
 async function postData(url = '', data = {}) {

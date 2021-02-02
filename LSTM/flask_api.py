@@ -31,8 +31,8 @@ def predict_withone():
     values = event["values"]
     print("values")
     print(values)
-    values = [x if x is not None else 0 for x in values]
-    prediction = model.run_model_online(values)
+    # values = [x if x is not None else 0 for x in values]
+    prediction = model.run_model_online(np.array(values), look_back=10)
     prediction = {y: float(x) for y,x  in prediction.items()}
     return jsonify(prediction)
 
