@@ -1,0 +1,29 @@
+[
+    {
+        "created_at": "2020-07-17 03:13:47.736023 UTC",
+        "# Timestamp": "2020-07-16 22:48:42 UTC",
+        "MMSI": 477004600,
+        "msg_type": 1,
+        "Latitude": -20.2746133333333,
+        "Longitude": 58.1816,
+        "SOG": 9.6,
+        "COG": 233.2,
+        "Heading": 232.0,
+        "ROT": 0.0,
+        "imo": 0.0,
+        "name": 0,
+        "call_sign": 0,
+        "flag": "HK",
+        "draught": 0.0,
+        "ship_and_cargo_type": 0.0,
+        "length": 0.0,
+        "width": 0.0,
+        "eta": 0,
+        "destination": 0,
+        "status": 0.0,
+        "maneuver": 0.0,
+        "accuracy": 0.0,
+        "collection_type": "satellite",
+        "mmsi_label": "mmsi-477004600"
+    }
+]

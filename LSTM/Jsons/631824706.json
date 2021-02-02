@@ -1,0 +1,29 @@
+[
+    {
+        "created_at": "2020-07-19 02:40:09.189619 UTC",
+        "# Timestamp": "2020-07-18 18:30:59 UTC",
+        "MMSI": 631824706,
+        "msg_type": 3,
+        "Latitude": -20.0985733333333,
+        "Longitude": 58.0041033333333,
+        "SOG": 11.0,
+        "COG": 66.5,
+        "Heading": 69.0,
+        "ROT": 4.0,
+        "imo": 0.0,
+        "name": 0,
+        "call_sign": 0,
+        "flag": "GQ",
+        "draught": 0.0,
+        "ship_and_cargo_type": 0.0,
+        "length": 0.0,
+        "width": 0.0,
+        "eta": 0,
+        "destination": 0,
+        "status": 0.0,
+        "maneuver": 0.0,
+        "accuracy": 0.0,
+        "collection_type": "satellite",
+        "mmsi_label": "mmsi-631824706"
+    }
+]

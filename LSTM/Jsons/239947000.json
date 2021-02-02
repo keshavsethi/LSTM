@@ -1,0 +1,29 @@
+[
+    {
+        "created_at": "2020-07-06 12:56:16.026166 UTC",
+        "# Timestamp": "2020-07-06 12:33:50 UTC",
+        "MMSI": 239947000,
+        "msg_type": 1,
+        "Latitude": -20.44715,
+        "Longitude": 58.3378,
+        "SOG": 11.1,
+        "COG": 61.0,
+        "Heading": 62.0,
+        "ROT": -127.0,
+        "imo": 0.0,
+        "name": 0,
+        "call_sign": 0,
+        "flag": "GR",
+        "draught": 0.0,
+        "ship_and_cargo_type": 0.0,
+        "length": 0.0,
+        "width": 0.0,
+        "eta": 0,
+        "destination": 0,
+        "status": 0.0,
+        "maneuver": 0.0,
+        "accuracy": 0.0,
+        "collection_type": "satellite",
+        "mmsi_label": "mmsi-239947000"
+    }
+]
