@@ -3,6 +3,9 @@ import pandas as pd
 import markdown
 from tqdm import tqdm
 import numpy as np
+import io
+from PIL import Image
+import weasyprint
 from matplotlib import pyplot as plt
 df = pd.read_csv("total_compiled.csv")
 import folium
@@ -19,7 +22,7 @@ import folium
 # folium.PolyLine(points, color="red", weight=2.5, opacity=1).add_to(my_map)
 
 # Save map
-my_map.save("./out.html")
+# my_map.save("./out.html")
 
 def get_details(latitude, longitude, eps=0.2):
 
@@ -41,11 +44,11 @@ def get_line_details(lat_1, lon_1, lat_2, lon_2, len_coeff=0.5):
         totals+=len(details[-1])
     if totals>0:
         for i,x in enumerate(points):
-            plt.scatter(x[0],x[1],c="r",alpha=0.7, s = 1000*len(details[i])/totals)
+            plt.scatter(x[1],x[0],c="r",alpha=0.7, s = 1000*len(details[i])/totals)
             if len(details[i])/totals > risk:
                 risk = len(details[i])/totals
                 highest_risk = (x[0],x[1])
-            plt.scatter(x[0],x[1],c="g")
+            plt.scatter(x[1],x[0],c="g")
     return pd.concat(details),points, highest_risk,risk
 
 def pd_to_text_details(df,points, high_risks, zoom=5):
@@ -79,8 +82,8 @@ def pd_to_text_details(df,points, high_risks, zoom=5):
     rist_str = [("- {} : {}".format(sp,cnt)) for sp,cnt in spec_meta[:min(10,len(spec_meta))]]
     # for idx, row in tqdm(df.iterrows()):
     #     plt.scatter(row.latitude,row.longitude,c="b")
-    plt.xlim(min_lat-5, max_lat+5)
-    plt.ylim(min_lon-5, max_lon+5)
+    plt.ylim(min_lat-5, max_lat+5)
+    plt.xlim(min_lon-5, max_lon+5)
     plt.savefig("image_2.png")
     print("Risk index: {}".format(np.log(len(df))))
     report = """# Assessment Report
