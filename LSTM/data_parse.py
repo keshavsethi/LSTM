@@ -7,7 +7,7 @@ import io
 from PIL import Image
 import weasyprint
 from matplotlib import pyplot as plt
-df = pd.read_csv("total_compiled.csv")
+df_global = pd.read_csv("total_compiled.csv")
 import folium
 # ave_lat = 23.5
 # ave_lon = 122.5
@@ -26,9 +26,9 @@ import folium
 
 def get_details(latitude, longitude, eps=0.2):
 
-    return df[
-        ((df["latitude"] <= latitude + eps) & (df["latitude"] > latitude - eps))
-        & ((df["longitude"] <= longitude + eps) & (df["longitude"] > longitude - eps))
+    return df_global[
+        ((df_global["latitude"] <= latitude + eps) & (df_global["latitude"] > latitude - eps))
+        & ((df_global["longitude"] <= longitude + eps) & (df_global["longitude"] > longitude - eps))
     ]
 
 
@@ -85,6 +85,19 @@ def pd_to_text_details(df,points, high_risks, zoom=5):
     plt.ylim(min_lat-5, max_lat+5)
     plt.xlim(min_lon-5, max_lon+5)
     plt.savefig("image_2.png")
+    plt.close()
+    local_df = df_global[
+        (df_global["latitude"] <= max_lat+20) & (df_global["latitude"] > min_lat-20) & (df_global["longitude"] <= max_lon+10) & (df_global["longitude"] > min_lon-10)
+    ]
+    # print(df)
+    # print(local_df)
+    local_df.plot.scatter("longitude","latitude", c="b", alpha = 0.5, s=0.8)
+    plt.ylim(min_lat-20, max_lat+20)
+    plt.xlim(min_lon-10, max_lon+10)
+    plt.savefig("regional_dist.png")
+    plt.close()
+
+
     print("Risk index: {}".format(np.log(len(df))))
     report = """# Assessment Report
 ### Route from {} to {}
@@ -92,12 +105,15 @@ def pd_to_text_details(df,points, high_risks, zoom=5):
 ## Number of Species Affected: {}
 ### Top 10 species affected
 {}
-## Risk index {}
+## Risk index {:.2f}
 ### Risk areas
 ![Map of route](./image_2.png "Route Map")
+### Regional Species distribution
+![Map of route](./regional_dist.png "Route Map")
+
 ## Higest risk regions
 {}
-""".format(str(points[0]),str(points[-1]),len(df),"\n".join(rist_str),np.log(len(df)), "- "+"\n- ".join([str(x) for x in high_risks]))
+""".format(points[0],points[-1],len(df),"\n".join(rist_str),float(np.log(len(df))), "- "+"\n- ".join(["({:.2f},{:.2f})".format(float(x[0]), float(x[1])) for x in high_risks]))
     plt.close()
     return report
     # plt.scatter(latitude,longitude,c="r", alpha=0.5)
@@ -113,7 +129,7 @@ def report_driver(list_of_ll, zoom = 5):
         df_list.append(df)
     df_list = pd.concat(df_list)
     report = pd_to_text_details(df_list,np.concatenate(points_list), high_risks, zoom=zoom)
-    print(report)
+    # print(report)
     report_html = markdown.markdown(report)
     report_file = open("report.html","w")
     report_file.write(report_html)
